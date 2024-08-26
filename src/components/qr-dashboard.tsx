@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
-import { ListItem } from "@mui/material";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
+import {
+    Box,
+    FormControl,
+    List,
+    ListItem,
+    ListItemText,
+    TextField
+} from "@mui/material";
 
 const QR_TYPES: { [key: string]: string } = {
 	url: "URL to QR Code",
@@ -20,36 +25,95 @@ export function QRCodeDashboard() {
 	}
 
 	return (
-		<>
-			<QRCodeList setQRType={onQRTypeChange} />
+		<Box
+			sx={{
+				display: "flex",
+				flexFlow: "row",
+				height: "100vh",
+				alignItems: "center"
+			}}
+		>
+			<QRCodeList onQRTypeChange={onQRTypeChange} />
 			<QRCodeForm QRType={QRType} />
-			<Button variant="contained">Abc</Button>
-		</>
+		</Box>
 	);
 }
 
-function QRCodeList({ setQRType }: { setQRType: (typeName: string) => void }) {
+function QRCodeList({
+	onQRTypeChange
+}: {
+	onQRTypeChange: (typeName: string) => void;
+}) {
 	return (
-		<>
-			<div>
-				<List>
-					{Object.keys(QR_TYPES).map((typeName) => {
-						return (
-							<ListItem key={typeName} onClick={() => setQRType(typeName)}>
-								{QR_TYPES[typeName]}
-							</ListItem>
-						);
-					})}
-				</List>
-			</div>
-		</>
+		<List
+			sx={{
+				m: 2,
+				width: "30%",
+				height: "100%",
+				display: "flex",
+				flexFlow: "column",
+				justifyContent: "center",
+				borderRight: "2px solid #fff"
+			}}
+		>
+			{Object.keys(QR_TYPES).map((typeName) => {
+				return (
+					<ListItem key={typeName} onClick={() => onQRTypeChange(typeName)}>
+						<ListItemText primary={QR_TYPES[typeName]}></ListItemText>
+					</ListItem>
+				);
+			})}
+		</List>
 	);
 }
 
 function QRCodeForm({ QRType }: { QRType: string }) {
+	const [email, setEmail] = useState("example@example.com");
+	const [url, setURL] = useState("www.example.com");
+	const canvasRef = useRef(null);
+
+	function onURLChange(event: ChangeEvent<HTMLInputElement>) {
+		setURL(event.target.value);
+	}
+
+	function onEmailChange(event: ChangeEvent<HTMLInputElement>) {
+		setEmail(event.target.value);
+	}
+
 	return (
-		<>
-			<div>{QRType}</div>
-		</>
+		<Box
+			sx={{
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+				width: "70%"
+			}}
+		>
+			<Box display={QRType === "url" ? "block" : "none"} component="form">
+				<FormControl>
+					<TextField
+						value={url}
+						onChange={onURLChange}
+						label="URL"
+						variant="outlined"
+						required
+						type="url"
+					/>
+				</FormControl>
+			</Box>
+			<Box display={QRType === "email" ? "block" : "none"} component="form">
+				<FormControl>
+					<TextField
+						value={email}
+						onChange={onEmailChange}
+						label="Email"
+						variant="outlined"
+						required
+						type="email"
+					/>
+				</FormControl>
+			</Box>
+			<canvas ref={canvasRef} width="200" height="200px"></canvas>
+		</Box>
 	);
 }
