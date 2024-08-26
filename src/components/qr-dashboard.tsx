@@ -62,7 +62,7 @@ function QRCodeList({
 		>
 			{Object.keys(QR_TYPES).map((typeName) => {
 				return (
-					<ListItem onClick={() => onQRTypeChange(typeName)} disablePadding>
+					<ListItem key={typeName} onClick={() => onQRTypeChange(typeName)} disablePadding>
 						<ListItemButton selected={QRType === typeName} sx={{ py: 2 }}>{QR_TYPES[typeName]}</ListItemButton>
 					</ListItem>
 				);
@@ -78,7 +78,7 @@ function QRCodeForm({ QRType }: { QRType: string }) {
 
 	// For the initially rendering the canvas with an www.example.com URL.
 	useEffect(() => {
-		QRCode.toCanvas(canvasRef.current, url, QRCodeErrorHandler);
+		QRCode.toCanvas(canvasRef.current, "www.example.com", QRCodeErrorHandler);
 	}, []);
 
 	function QRCodeErrorHandler(error: Error | null | undefined) {
