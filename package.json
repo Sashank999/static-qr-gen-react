@@ -16,7 +16,9 @@
 		"@emotion/styled": "^11.13.0",
 		"@mui/material": "^5.16.7",
 		"@mui/material-nextjs": "^5.16.6",
+		"@types/qrcode": "^1.5.5",
 		"next": "14.2.6",
+		"qrcode": "^1.5.4",
 		"react": "^18",
 		"react-dom": "^18"
 	},
