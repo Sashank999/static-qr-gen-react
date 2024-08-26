@@ -3,13 +3,15 @@
 import { ChangeEvent, useRef, useState } from "react";
 
 import {
-    Box,
-    FormControl,
-    List,
-    ListItem,
-    ListItemText,
-    TextField
+	Box,
+	FormControl,
+	List,
+	ListItem,
+	ListItemText,
+	TextField
 } from "@mui/material";
+
+import QRCode from "qrcode";
 
 const QR_TYPES: { [key: string]: string } = {
 	url: "URL to QR Code",
@@ -74,10 +76,24 @@ function QRCodeForm({ QRType }: { QRType: string }) {
 
 	function onURLChange(event: ChangeEvent<HTMLInputElement>) {
 		setURL(event.target.value);
+		if (!event.target.value) return;
+
+		QRCode.toCanvas(canvasRef.current, event.target.value, (error) => {
+			if (error) alert(error);
+		});
 	}
 
 	function onEmailChange(event: ChangeEvent<HTMLInputElement>) {
 		setEmail(event.target.value);
+		if (!event.target.value) return;
+
+		QRCode.toCanvas(
+			canvasRef.current,
+			"mailto:" + event.target.value,
+			(error) => {
+				if (error) alert(error);
+			}
+		);
 	}
 
 	return (
@@ -113,7 +129,7 @@ function QRCodeForm({ QRType }: { QRType: string }) {
 					/>
 				</FormControl>
 			</Box>
-			<canvas ref={canvasRef} width="200" height="200px"></canvas>
+			<canvas ref={canvasRef} width="200px" height="200px"></canvas>
 		</Box>
 	);
 }
