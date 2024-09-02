@@ -25,4 +25,8 @@
 	#qr-code-types-list .MuiListItem-root {
 		max-width: fit-content;
 	}
+
+	#qr-code-types-list .MuiListItemIcon-root {
+		min-width: 35px;
+	}
 }
