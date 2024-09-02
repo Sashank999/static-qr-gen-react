@@ -1,0 +1,8 @@
+#qr-code-types-list {
+	width: 30%;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	border-right: 2px solid #fff;
+}

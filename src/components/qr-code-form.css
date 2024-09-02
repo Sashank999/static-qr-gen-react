@@ -1,0 +1,13 @@
+#qr-code-form {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	width: 70%;
+	gap: 20px;
+}
+
+#qr-code-download-buttons {
+	display: flex;
+	gap: 9px;
+}

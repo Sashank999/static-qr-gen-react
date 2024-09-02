@@ -1,5 +1,6 @@
 import { List, ListItem, ListItemButton } from "@mui/material";
 
+import "./qr-code-types-list.css";
 
 export const QR_TYPES: { [key: string]: string } = {
 	url: "URL to QR Code",
@@ -7,28 +8,25 @@ export const QR_TYPES: { [key: string]: string } = {
 	image: "Image to QR Code"
 };
 
-
 export function QRCodeTypesList({
-	QRType, onQRTypeChange
+	QRType,
+	onQRTypeChange
 }: {
-	QRType: string,
+	QRType: string;
 	onQRTypeChange: (typeName: string) => void;
 }) {
 	return (
-		<List
-			sx={{
-				width: "30%",
-				height: "100%",
-				display: "flex",
-				flexFlow: "column",
-				justifyContent: "center",
-				borderRight: "2px solid #fff"
-			}}
-		>
+		<List id="qr-code-types-list">
 			{Object.keys(QR_TYPES).map((typeName) => {
 				return (
-					<ListItem key={typeName} onClick={() => onQRTypeChange(typeName)} disablePadding>
-						<ListItemButton selected={QRType === typeName} sx={{ py: 2 }}>{QR_TYPES[typeName]}</ListItemButton>
+					<ListItem
+						key={typeName}
+						onClick={() => onQRTypeChange(typeName)}
+						disablePadding
+					>
+						<ListItemButton selected={QRType === typeName} sx={{ py: 2 }}>
+							{QR_TYPES[typeName]}
+						</ListItemButton>
 					</ListItem>
 				);
 			})}
