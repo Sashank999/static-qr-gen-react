@@ -1,6 +1,17 @@
-import { Box, List, ListItem, ListItemButton, ListItemIcon } from "@mui/material";
+import {
+	Box,
+	List,
+	ListItem,
+	ListItemButton,
+	ListItemIcon
+} from "@mui/material";
 
-import { Link as LinkIcon, Email as EmailIcon, Image as ImageIcon, SvgIconComponent } from '@mui/icons-material';
+import {
+	Link as LinkIcon,
+	Email as EmailIcon,
+	Image as ImageIcon,
+	SvgIconComponent
+} from "@mui/icons-material";
 
 import "./qr-code-types-list.css";
 import React from "react";
