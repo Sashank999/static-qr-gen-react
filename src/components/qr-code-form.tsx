@@ -1,4 +1,12 @@
-import { Box, Button, FormControl, TextField } from "@mui/material";
+import {
+	Box,
+	Button,
+	Card,
+	CardContent,
+	FormControl,
+	Input,
+	TextField
+} from "@mui/material";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import QRCode from "qrcode";
@@ -6,8 +14,8 @@ import QRCode from "qrcode";
 import "./qr-code-form.css";
 
 export function QRCodeForm({ QRType }: { QRType: string }) {
-	const [email, setEmail] = useState("example@example.com");
 	const [url, setURL] = useState("www.example.com");
+	const [email, setEmail] = useState("example@example.com");
 	const canvasRef = useRef(null);
 
 	// For the initially rendering the canvas with a www.example.com URL.
@@ -35,6 +43,19 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 			"mailto:" + event.target.value,
 			QRCodeErrorHandler
 		);
+	}
+
+	function onImageChange(event: ChangeEvent<HTMLInputElement>) {
+		const input = event.target as HTMLInputElement;
+		if (!input.files?.length) return;
+
+		const file = input.files[0];
+		file.arrayBuffer().then((arrayBuffer) => {
+			const arr = new Uint8ClampedArray(arrayBuffer);
+			QRCode.toCanvas(canvasRef.current, [{ data: arr, mode: "byte" }], {
+				errorCorrectionLevel: "L"
+			});
+		});
 	}
 
 	function downloadImage(MIMEType = "image/png", filename = "qr.png") {
@@ -85,11 +106,32 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 					/>
 				</FormControl>
 			</Box>
+			<Box display={QRType === "image" ? "block" : "none"} component="form">
+				<FormControl>
+					<Card>
+						<CardContent>
+							This directly creates a QR Code that embeds the image at low
+							compression mode. You can print this QR and use any popular QR
+							decoder such as
+							<a href="https://www.zxing.org"> ZXing </a>
+							to decode it to your original image. It has a limit of 2953
+							bytes (around 2 KB).
+							<Button>
+								<input
+									type="file"
+									accept="image/*"
+									onChange={onImageChange}
+								></input>
+							</Button>
+						</CardContent>
+					</Card>
+				</FormControl>
+			</Box>
 
 			{/* Actual canvas to display the generated QR code. */}
 			<canvas
 				ref={canvasRef}
-				style={{ minWidth: "300px", minHeight: "300px" }}
+				style={{ width: "300px", height: "300px" }}
 			></canvas>
 
 			{/* Download buttons. */}

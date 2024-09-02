@@ -4,7 +4,11 @@
 	align-items: center;
 	justify-content: center;
 	width: 70%;
+	min-height: 100vh;
+	overflow-y: auto;
+	border-left: 2px solid #fff;
 	gap: 20px;
+	padding: 30px;
 }
 
 #qr-code-download-buttons {
@@ -16,5 +20,7 @@
 	#qr-code-form {
 		width: 100%;
 		height: calc(100vh - 60px);
+		border-left: none;
+		border-top: 2px solid #fff;
 	}
 }
