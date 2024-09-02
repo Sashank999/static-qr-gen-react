@@ -4,3 +4,9 @@
 	height: 100vh;
 	align-items: center;
 }
+
+@media only screen and (max-width: 768px) {
+	#qr-code-dashboard {
+		flex-flow: column;
+	}
+}

@@ -1,8 +1,31 @@
-#qr-code-types-list {
+#qr-code-types-list-container {
 	width: 30%;
 	height: 100%;
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
 	border-right: 2px solid #fff;
+}
+
+@media only screen and (max-width: 768px) {
+	#qr-code-types-list-container {
+		height: 60px;
+		width: 100%;
+		overflow-x: scroll;
+		flex-flow: row;
+		border-right: none;
+		border-bottom: 2px solid #fff;
+	}
+
+	#qr-code-types-list {
+		display: flex;
+		flex-flow: column;
+		flex-wrap: wrap;
+		width: 100%;
+		padding: 0;
+	}
+
+	#qr-code-types-list .MuiListItem-root {
+		max-width: fit-content;
+	}
 }

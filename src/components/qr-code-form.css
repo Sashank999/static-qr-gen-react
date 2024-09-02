@@ -11,3 +11,10 @@
 	display: flex;
 	gap: 9px;
 }
+
+@media only screen and (max-width: 768px) {
+	#qr-code-form {
+		width: 100%;
+		height: calc(100vh - 60px);
+	}
+}

@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemButton } from "@mui/material";
+import { Box, List, ListItem, ListItemButton } from "@mui/material";
 
 import "./qr-code-types-list.css";
 
@@ -16,20 +16,22 @@ export function QRCodeTypesList({
 	onQRTypeChange: (typeName: string) => void;
 }) {
 	return (
-		<List id="qr-code-types-list">
-			{Object.keys(QR_TYPES).map((typeName) => {
-				return (
-					<ListItem
-						key={typeName}
-						onClick={() => onQRTypeChange(typeName)}
-						disablePadding
-					>
-						<ListItemButton selected={QRType === typeName} sx={{ py: 2 }}>
-							{QR_TYPES[typeName]}
-						</ListItemButton>
-					</ListItem>
-				);
-			})}
-		</List>
+		<Box id="qr-code-types-list-container">
+			<List id="qr-code-types-list">
+				{Object.keys(QR_TYPES).map((typeName) => {
+					return (
+						<ListItem
+							key={typeName}
+							onClick={() => onQRTypeChange(typeName)}
+							disablePadding
+						>
+							<ListItemButton selected={QRType === typeName} sx={{ py: 2 }}>
+								{QR_TYPES[typeName]}
+							</ListItemButton>
+						</ListItem>
+					);
+				})}
+			</List>
+		</Box>
 	);
 }
