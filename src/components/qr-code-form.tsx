@@ -113,7 +113,7 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 							This directly creates a QR Code that embeds the image at low
 							compression mode. You can print this QR and use any popular QR
 							decoder such as
-							<a href="https://www.zxing.org"> ZXing </a>
+							<a href="https://www.zxing.org">ZXing</a>
 							to decode it to your original image. It has a limit of 2953 bytes
 							(around 2 KB).
 							<Button>
