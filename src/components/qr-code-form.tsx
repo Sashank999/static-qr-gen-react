@@ -82,7 +82,12 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 	return (
 		<Box id="qr-code-form">
 			{/* Input fields for data input. */}
-			<Box display={QRType === "url" ? "block" : "none"} component="form">
+			<Box
+				sx={{
+					display: QRType === "url" ? "block" : "none"
+				}}
+				component="form"
+			>
 				<FormControl>
 					<TextField
 						value={url}
@@ -94,7 +99,12 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 					/>
 				</FormControl>
 			</Box>
-			<Box display={QRType === "email" ? "block" : "none"} component="form">
+			<Box
+				sx={{
+					display: QRType === "email" ? "block" : "none"
+				}}
+				component="form"
+			>
 				<FormControl>
 					<TextField
 						value={email}
@@ -106,16 +116,21 @@ export function QRCodeForm({ QRType }: { QRType: string }) {
 					/>
 				</FormControl>
 			</Box>
-			<Box display={QRType === "image" ? "block" : "none"} component="form">
+			<Box
+				sx={{
+					display: QRType === "image" ? "block" : "none"
+				}}
+				component="form"
+			>
 				<FormControl>
 					<Card>
 						<CardContent>
 							This directly creates a QR Code that embeds the image at low
 							compression mode. You can print this QR and use any popular QR
-							decoder such as
+							decoder such as&nbsp;
 							<a href="https://www.zxing.org">ZXing</a>
-							to decode it to your original image. It has a limit of 2953 bytes
-							(around 2 KB).
+							&nbsp;to decode it to your original image. It has a limit of 2953
+							bytes (around 2 KB).
 							<Button>
 								<input
 									type="file"
